@@ -52,3 +52,37 @@ if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.match
   } else {
     darkToggle.checked = false;
   }
+
+
+// Navbar Active
+document.addEventListener('DOMContentLoaded', function() {
+  const sections = document.querySelectorAll('section');
+  const navLinks = document.querySelectorAll('#nav-menu a');
+
+  window.addEventListener('scroll', function() {
+    let currentSection = '';
+
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop - 100; // Offset untuk penyesuaian
+      if (window.scrollY >= sectionTop) {
+        currentSection = section.getAttribute('id');
+      }
+    });
+
+    navLinks.forEach(link => {
+      link.classList.remove('navbar-active');
+      link.style.color = '';
+
+      if (link.getAttribute('href').includes(currentSection)) {
+        link.classList.add('navbar-active');
+
+        // Atur warna untuk mode terang dan gelap
+        if (document.documentElement.classList.contains('dark')) {
+          link.style.color = '#0EA5E9';
+        } else {
+          link.style.color = '#0EA5E9';
+        }
+      }
+    });
+  });
+});
